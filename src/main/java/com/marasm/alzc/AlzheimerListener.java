@@ -88,6 +88,16 @@ public interface AlzheimerListener extends ParseTreeListener {
 	 */
 	void exitFuncCall(AlzheimerParser.FuncCallContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AlzheimerParser#forStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterForStatement(AlzheimerParser.ForStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AlzheimerParser#forStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitForStatement(AlzheimerParser.ForStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AlzheimerParser#assignStatement}.
 	 * @param ctx the parse tree
 	 */

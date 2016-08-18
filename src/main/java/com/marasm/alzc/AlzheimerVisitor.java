@@ -59,6 +59,12 @@ public interface AlzheimerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFuncCall(AlzheimerParser.FuncCallContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AlzheimerParser#forStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitForStatement(AlzheimerParser.ForStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AlzheimerParser#assignStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

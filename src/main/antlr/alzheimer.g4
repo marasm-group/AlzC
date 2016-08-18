@@ -1,5 +1,5 @@
 grammar Alzheimer;
-program : (expression | compoundStatement)+ ;
+program : (expression)+ ;
 
 Number: (([0-9]+) | '-'([0-9])+) | (([0-9])+'.'([0-9])+ | '-'([0-9])+'.'([0-9])+ );
 String: '"' .*? '"';
@@ -13,6 +13,7 @@ EQUAL: '=';
 IF: 'if' ;
 ELSE: 'else' ;
 WHILE: 'while' ;
+FOR: 'for' ;
 RETURN: 'return' ;
 
 FUN: 'fun' | 'fun:';
@@ -34,7 +35,7 @@ Type: ':'Symbol ;
 
 varDecl
 :
-    (VAR argument) | (VAR (argument COMMA)+ argument) | (VAR argument+)
+    (VAR arguments)
 ;
 
 argument: (Symbol Type);
@@ -45,16 +46,16 @@ arguments
 
 funcDecl
 :
-    (FUN Symbol OpenPar ClosePar) |
-    (FUN Symbol OpenPar arguments ClosePar)|
-    (FUN Symbol OpenPar arguments ClosePar Type)|
-    (FUN Symbol OpenPar ClosePar) Type
+    (FUN Symbol OpenPar ClosePar compoundStatement) |
+    (FUN Symbol OpenPar arguments ClosePar compoundStatement)|
+    (FUN Symbol OpenPar arguments ClosePar Type compoundStatement)|
+    (FUN Symbol OpenPar ClosePar Type compoundStatement)
 
 ;
 
 parameter
 :
-    funcCall | Symbol | Number
+    funcCall | Symbol | Number | String
 ;
 parameters
 :
@@ -65,27 +66,34 @@ funcCall
     (Symbol OpenPar parameters ClosePar) | (Symbol OpenPar ClosePar)
 ;
 
+forStatement
+:
+    FOR (varDecl | statement | assignStatement) SEMICOLON (statement) SEMICOLON expression compoundStatement
+;
+
+
 assignStatement
 :
-    Symbol EQUAL statement
+    (Symbol EQUAL statement)|
+    (Symbol EQUAL OpenPar statement ClosePar)
 ;
 
 ifStatement
 :
-    IF (statement | Number) compoundStatement |
-    IF (statement | Number) compoundStatement ELSE compoundStatement
+    (IF (statement) compoundStatement) |
+    (IF (statement) compoundStatement ELSE compoundStatement)
 ;
 
 whileStatement
 :
-    WHILE (statement | Number) compoundStatement
+    WHILE (statement) compoundStatement
 ;
 
 compoundStatement
 :
    (BEGIN (expression)+ END) |
    (BEGIN END)|
-   (expression LEGACY_END)
+   (expression+ LEGACY_END) | LEGACY_END
 ;
 importStatement
 :
@@ -107,12 +115,13 @@ expression
     (returnStatement SEMICOLON)|
     ifStatement |
     whileStatement |
+    forStatement |
     funcDecl
 ;
 
 statement
 :
-    funcCall
+    funcCall | Number
 ;
 
 

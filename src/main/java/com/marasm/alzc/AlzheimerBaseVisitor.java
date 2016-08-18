@@ -73,6 +73,13 @@ public class AlzheimerBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitForStatement(AlzheimerParser.ForStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAssignStatement(AlzheimerParser.AssignStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
