@@ -1,0 +1,9 @@
+INTEGER=1
+REAL=2
+Symbol=3
+Type=4
+VarDecl=5
+FuncDecl=6
+WS=7
+BlockComment=8
+LineComment=9
