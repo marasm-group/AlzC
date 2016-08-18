@@ -21,7 +21,7 @@ VAR: 'var';
 BEGIN: '{' ;
 END: '}' ;
 
-LEGACY_STATEMENT: '$:' ;
+LEGACY_STATEMENT: '$:' -> skip ;
 LEGACY_END: 'end' | 'endif' | 'endwhile' | 'endfor' ;
 
 
@@ -103,7 +103,7 @@ expression
     (varDecl SEMICOLON ) |
     (assignStatement SEMICOLON) |
     (statement SEMICOLON)|
-    (LEGACY_STATEMENT statement SEMICOLON)|
+    //(LEGACY_STATEMENT statement SEMICOLON)|
     (returnStatement SEMICOLON)|
     ifStatement |
     whileStatement |

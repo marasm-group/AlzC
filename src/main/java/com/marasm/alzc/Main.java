@@ -11,10 +11,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import java.awt.*;
-import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,15 +21,8 @@ public class Main
 
     public static void main(String[] args) throws IOException
     {
-        System.out.println("Hello World!");
-        String testStr = "import \"VEGA\" \"conio\" \"common\";\n" +
-                "$: setColor(color(0 255 0));\n" +
-                "$: drawRect(0 0 100 100);\n" +
-                "fun: color(r g b) :number\n" +
-                "  return add(b add(mul(g 256) mul(r 65536)));\n" +
-                "end";
-        ByteArrayInputStream strStream = new ByteArrayInputStream(testStr.getBytes(StandardCharsets.UTF_8));
-        CharStream stream = new ANTLRInputStream(strStream);
+        FileInputStream fis = new FileInputStream(args[0]);
+        CharStream stream = new ANTLRInputStream(fis);
         AlzheimerLexer lexer = new AlzheimerLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         AlzheimerParser parser = new AlzheimerParser( tokens );
