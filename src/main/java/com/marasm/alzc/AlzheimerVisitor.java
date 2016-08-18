@@ -83,6 +83,24 @@ public interface AlzheimerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWhileStatement(AlzheimerParser.WhileStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AlzheimerParser#typeField}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeField(AlzheimerParser.TypeFieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AlzheimerParser#typeFields}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeFields(AlzheimerParser.TypeFieldsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AlzheimerParser#typeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeStatement(AlzheimerParser.TypeStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AlzheimerParser#compoundStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

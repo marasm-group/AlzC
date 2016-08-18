@@ -128,6 +128,36 @@ public interface AlzheimerListener extends ParseTreeListener {
 	 */
 	void exitWhileStatement(AlzheimerParser.WhileStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link AlzheimerParser#typeField}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeField(AlzheimerParser.TypeFieldContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AlzheimerParser#typeField}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeField(AlzheimerParser.TypeFieldContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AlzheimerParser#typeFields}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeFields(AlzheimerParser.TypeFieldsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AlzheimerParser#typeFields}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeFields(AlzheimerParser.TypeFieldsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AlzheimerParser#typeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeStatement(AlzheimerParser.TypeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AlzheimerParser#typeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeStatement(AlzheimerParser.TypeStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AlzheimerParser#compoundStatement}.
 	 * @param ctx the parse tree
 	 */

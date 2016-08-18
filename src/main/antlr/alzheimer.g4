@@ -16,22 +16,25 @@ WHILE: 'while' ;
 FOR: 'for' ;
 RETURN: 'return' ;
 
+TYPE: 'type' ;
+
 FUN: 'fun' | 'fun:';
 VAR: 'var';
 
+DOT: '.' ;
 BEGIN: '{' ;
 END: '}' ;
 
 LEGACY_STATEMENT: '$:' -> skip ;
 LEGACY_END: 'end' | 'endif' | 'endwhile' | 'endfor' ;
 
-
-//Symbol: (('a'..'z')|('A'..'Z')|'_')(('a'..'z')|('A'..'Z')|'_'|('0'..'9'))+;
 Symbol
 :
-    [A-Za-z]+
+    ([A-Za-z]+) | (Type DOT 'size')
 ;
+
 Type: ':'Symbol ;
+
 
 varDecl
 :
@@ -50,7 +53,6 @@ funcDecl
     (FUN Symbol OpenPar arguments ClosePar compoundStatement)|
     (FUN Symbol OpenPar arguments ClosePar Type compoundStatement)|
     (FUN Symbol OpenPar ClosePar Type compoundStatement)
-
 ;
 
 parameter
@@ -89,6 +91,22 @@ whileStatement
     WHILE (statement) compoundStatement
 ;
 
+typeField
+:
+    (Type Symbol+ )|
+    (Type (Symbol COMMA)+ Symbol)
+;
+typeFields
+:
+    (typeField+ LEGACY_END) |
+    (BEGIN typeField END)
+;
+
+typeStatement
+:
+    TYPE Type typeFields
+;
+
 compoundStatement
 :
    (BEGIN (expression)+ END) |
@@ -108,6 +126,7 @@ returnStatement
 expression
 :
     (importStatement SEMICOLON)|
+    (typeStatement )|
     (varDecl SEMICOLON ) |
     (assignStatement SEMICOLON) |
     (statement SEMICOLON)|
@@ -121,7 +140,7 @@ expression
 
 statement
 :
-    funcCall | Number
+    funcCall | Number | Symbol
 ;
 
 
@@ -133,4 +152,9 @@ LineComment
 :
 	'//' ~[\r\n]* -> skip
 ;
+LineComment2
+:
+	'#' ~[\r\n]* -> skip
+;
+
 WS : ( ' ' | '\t' | '\r' | '\n' )+ -> skip ;
